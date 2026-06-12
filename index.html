@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(to bottom,#0f172a,#1e293b);
+    overflow-x:hidden;
+}
+
+/* Estrellas */
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+    50%{
+        opacity:0.3;
+    }
+}
+
+/* Carta */
+
+.card{
+    width:90%;
+    max-width:700px;
+    margin:100px auto;
+    padding:30px;
+
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+
+    border-radius:25px;
+
+    color:white;
+    text-align:center;
+
+    box-shadow:0 0 30px rgba(255,255,255,0.1);
+
+    position:relative;
+    z-index:10;
+}
+
+.card h1{
+    margin-bottom:20px;
+}
+
+.card p{
+    line-height:1.7;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 25px;
+
+    border:none;
+    border-radius:30px;
+
+    background:#ff4d6d;
+    color:white;
+
+    cursor:pointer;
+    font-size:16px;
+
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.hidden{
+    display:none;
+}
+
+/* Corazones */
+
+.heart{
+    position:absolute;
+    color:#ff4d6d;
+    animation:float 6s linear forwards;
+    user-select:none;
+    z-index:999;
+}
+
+@keyframes float{
+
+    from{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-800px) scale(2);
+        opacity:0;
+    }
+
+}
+
+/* Fotos alrededor */
+
+.foto-lateral{
+    position:absolute;
+    width:180px;
+    border-radius:15px;
+    border:4px solid white;
+    box-shadow:0 0 15px rgba(255,255,255,0.2);
+}
+
+.foto1{
+    top:120px;
+    left:50px;
+    transform:rotate(-8deg);
+}
+
+.foto2{
+    top:350px;
+    right:50px;
+    transform:rotate(8deg);
+}
+
+.foto3{
+    top:650px;
+    left:80px;
+    transform:rotate(-5deg);
+}
+
+/* Galería */
+
+.galeria{
+    width:90%;
+    max-width:900px;
+    margin:100px auto;
+    text-align:center;
+    color:white;
+    position:relative;
+    z-index:10;
+}
+
+.galeria h2{
+    margin-bottom:40px;
+}
+
+.foto{
+    margin-bottom:60px;
+}
+
+.foto img{
+    width:100%;
+    max-width:600px;
+
+    border-radius:20px;
+
+    box-shadow:0 0 20px rgba(255,255,255,0.2);
+
+    transition:0.3s;
+}
+
+.foto img:hover{
+    transform:scale(1.03);
+}
+
+.foto p{
+    margin-top:15px;
+    font-size:18px;
+}
+
+/* Mensaje final */
+
+.final{
+    text-align:center;
+    color:white;
+    margin:100px auto;
+    width:90%;
+    max-width:700px;
+}
+
+.final h2{
+    margin-bottom:20px;
+}
+
+.final p{
+    line-height:1.8;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Fotos decorativas -->
+
+<img src="foto1.jpg" class="foto-lateral foto1">
+<img src="foto2.jpg" class="foto-lateral foto2">
+<img src="foto3.jpg" class="foto-lateral foto3">
+
+<!-- Carta -->
+
+<div class="card">
+
+    <h1>Para Ti Mireya ❤️</h1>
+
+    <p>
+        Entre todas las personas que pude conocer,
+        me alegra muchísimo haberte encontrado.
+        Gracias por cada sonrisa, cada momento,
+        cada conversación y cada recuerdo.
+    </p>
+
+    <br>
+
+    <p>
+        Tal vez esta página sea sencilla,
+        pero cada línea fue hecha pensando en ti.
+    </p>
+
+    <button onclick="abrirCarta()">
+        Abrir Carta 💌
+    </button>
+
+    <div id="mensaje" class="hidden">
+
+        <br>
+
+        <p>
+            ROCIO eres la mejor persona que eh conocido en mucho tiempo me haces
+            sentir muy especial y muy bonito lo que haces por mi
+            la verdad me siento muy amado por ti gracias y perdon si aveces te 
+            hago sentir mal o soy muy estresante la verdad si te soy sincero yo quiero algo
+            contigo por eso estoy dispuesto a cambiar
+            y no tropesar en la mismas piedras quiero decirte
+            que siempre te voy a recordar lo mucho que te amo ❤️
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Galería -->
+
+<div class="galeria">
+
+    <h2>Mi Novia ❤️</h2>
+
+    <div class="foto">
+        <img src="foto1.jpg">
+        <p>Uno de mis recuerdos favoritos contigo ✨</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto2.jpg">
+        <p>Lo bonita que eres ❤️</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto3.jpg">
+        <p>Tu poniendote mas guapa 💕</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto4.jpg">
+        <p> ✨</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto5.jpg">
+        <p> ❤️</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto6.jpg">
+        <p> 💕</p>
+    </div>
+        <div class="foto">
+        <img src="foto7.jpg">
+        <p> ✨</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto8.jpg">
+        <p> ❤️</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto9.jpg">
+        <p> 💕</p>
+    </div>
+        <div class="foto">
+        <img src="foto10.jpg">
+        <p> ✨</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto11.jpg">
+        <p> ❤️</p>
+    </div>
+
+    <div class="foto">
+        <img src="foto12.jpg">
+        <p> 💕</p>
+    </div>
+        <div class="foto">
+        <img src="foto13.jpg">
+        <p> 💕</p>
+    </div>
+
+</div>
+
+<!-- Mensaje Final -->
+
+<div class="final">
+
+    <h2>❤️ Gracias por estar aquí Conmigo ❤️</h2>
+
+    <p>
+        TE AMO❤️
+    </p>
+
+</div>
+
+<script>
+
+/* Estrellas */
+
+for(let i=0;i<150;i++){
+
+    let star=document.createElement("div");
+
+    star.classList.add("star");
+
+    let size=Math.random()*3+1;
+
+    star.style.width=size+"px";
+    star.style.height=size+"px";
+
+    star.style.left=Math.random()*100+"vw";
+    star.style.top=Math.random()*1000+"vh";
+
+    star.style.animationDelay=Math.random()*3+"s";
+
+    document.body.appendChild(star);
+}
+
+/* Carta */
+
+function abrirCarta(){
+
+    document
+    .getElementById("mensaje")
+    .classList.remove("hidden");
+
+    for(let i=0;i<100;i++){
+
+        setTimeout(()=>{
+
+            let heart=document.createElement("div");
+
+            heart.innerHTML="❤️";
+
+            heart.classList.add("heart");
+
+            heart.style.left=Math.random()*100+"vw";
+
+            heart.style.bottom="-20px";
+
+            heart.style.fontSize=
+            (Math.random()*30+15)+"px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(()=>{
+                heart.remove();
+            },6000);
+
+        },i*50);
+
+    }
+
+}
+
+</script>
+<div class="contador">
+
+    <h2> Tiempo desde que comenzó nuestra historia ❤️</h2>
+
+    <p id="tiempo"></p>
+<style>.contador{
+    text-align:center;
+    color:white;
+    margin:100px auto;
+    width:90%;
+    max-width:700px;
+}
+
+.contador h2{
+    margin-bottom:20px;
+}
+
+#tiempo{
+    font-size:28px;
+    font-weight:bold;
+}</style>
+<script>function actualizarContador(){
+
+    const inicio = new Date("2026-05-18T12:50:00");
+
+    const ahora = new Date();
+
+    const diferencia = ahora - inicio;
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+
+    const horas = Math.floor(
+        (diferencia % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutos = Math.floor(
+        (diferencia % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const segundos = Math.floor(
+        (diferencia % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById("tiempo").innerHTML =
+        dias + " días, " +
+        horas + " horas, " +
+        minutos + " minutos y " +
+        segundos + " segundos ❤️";
+}
+
+setInterval(actualizarContador, 1000);
+
+actualizarContador();function actualizarContador(){
+
+    const inicio = new Date("2026-05-18T12:50:00");
+
+    const ahora = new Date();
+
+    const diferencia = ahora - inicio;
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+
+    const horas = Math.floor(
+        (diferencia % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutos = Math.floor(
+        (diferencia % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const segundos = Math.floor(
+        (diferencia % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById("tiempo").innerHTML =
+        dias + " días, " +
+        horas + " horas, " +
+        minutos + " minutos y " +
+        segundos + " segundos ❤️";
+}
+
+setInterval(actualizarContador, 1000);
+
+actualizarContador();</script>
+</div>
+</body>
+</html>
