@@ -205,9 +205,8 @@ button:hover{
 
 <!-- Fotos decorativas -->
 
-<img src="foto1.jpg" class="foto-lateral foto1">
-<img src="foto2.jpg" class="foto-lateral foto2">
-<img src="foto3.jpg" class="foto-lateral foto3">
+<img src="foto9.jpg" class="foto-lateral foto1">
+<img src="foto6.jpg" class="foto-lateral foto2">
 
 <!-- Carta -->
 
@@ -250,7 +249,9 @@ button:hover{
     </div>
 
 </div>
-
+<button onclick="irAlFinal()">
+     Ver contador 
+        </button>
 <!-- Galería -->
 
 <div class="galeria">
@@ -334,7 +335,14 @@ button:hover{
 </div>
 
 <script>
+function irAlFinal(){
 
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+
+}
 /* Estrellas */
 
 for(let i=0;i<150;i++){
