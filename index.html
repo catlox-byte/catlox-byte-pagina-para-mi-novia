@@ -381,6 +381,7 @@ button:hover{
 </div>
 
 <script>
+    /*boton ir al final*/
 function irAlFinal(){
 
     window.scrollTo({
@@ -411,13 +412,20 @@ for(let i=0;i<150;i++){
 }
 
 /* Carta */
+let corazonesYaLanzados = false;
 
 function abrirCarta(){
+    
+    if(corazonesYaLanzados) return;
+
+    corazonesYaLanzados = true;
 
     document
     .getElementById("mensaje")
     .classList.remove("hidden");
 
+    const cantidad =
+    window.innerWidth < 768 ? 15 : 35;
     for(let i=0;i<100;i++){
 
         setTimeout(()=>{
