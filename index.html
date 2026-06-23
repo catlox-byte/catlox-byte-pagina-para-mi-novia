@@ -6,7 +6,27 @@
 <title>Para Ti ❤️</title>
 <p style="color:white;">Actualización 1.0</p>
 <style>
+/* razones */
+.razones{
+    text-align:center;
+    color:white;
+    width:90%;
+    max-width:700px;
+    margin:100px auto;
+}
 
+.razones h2{
+    margin-bottom:20px;
+}
+
+#razonTexto{
+    font-size:22px;
+    min-height:60px;
+    margin-bottom:20px;
+    padding:20px;
+    background:rgba(255,255,255,0.1);
+    border-radius:15px;
+}
 *{
     margin:0;
     padding:0;
@@ -392,7 +412,18 @@ button:hover{
         <p> 💕</p>
     </div>
 </div>
+<!-- RAZONES -->
+<div class="razones">
 
+    <h2>❤️ Razones por las que me gustas ❤️</h2>
+
+    <p id="razonTexto">
+        Presiona el botón para descubrir una razón ❤️
+    </p>
+
+    <button onclick="mostrarRazon()">
+        ❤️ Mostrar razón ❤️
+    </button>
 <!-- Mensaje Final -->
 
 <div class="final">
@@ -402,10 +433,60 @@ button:hover{
     <p>
         TE AMO COMO UNA VACA MUUUUUUCHOOOO❤️
     </p>
-
 </div>
-
+    <!-- RAZONES -->
 <script>
+        const razones = [
+
+"Me haces sonreír incluso en los días difíciles ❤️",
+
+"Me encanta hablar contigo ❤️",
+
+"Siempre haces mis días mejores ❤️",
+
+"Me gusta pasar tiempo contigo ❤️",
+
+"Porque eres una persona muy especial para mí ❤️",
+
+"Porque me haces sentir feliz ❤️",
+
+"Porque me encanta escuchar tu voz ❤️",
+
+"Porque siempre logras sacarme una sonrisa ❤️",
+
+"Porque me gusta cómo eres ❤️",
+
+"Porque haces que cada día sea más bonito ❤️"
+
+];
+
+function mostrarRazon(){
+
+    const indice =
+    Math.floor(Math.random()*razones.length);
+
+let texto = razones[indice];
+
+let elemento =
+document.getElementById("razonTexto");
+
+elemento.innerHTML = "";
+
+let i = 0;
+
+let intervalo = setInterval(()=>{
+
+    elemento.innerHTML += texto[i];
+
+    i++;
+
+    if(i >= texto.length){
+        clearInterval(intervalo);
+    }
+
+},40);
+
+}
     /*boton ir al final*/
 function irAlFinal(){
 
@@ -429,7 +510,7 @@ for(let i=0;i<150;i++){
     star.style.height=size+"px";
 
     star.style.left=Math.random()*100+"vw";
-    star.style.top=Math.random()*900+"vh";
+    star.style.top=Math.random()*2000+"vh";
 
     star.style.animationDelay=Math.random()*3+"s";
 
