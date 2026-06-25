@@ -7,6 +7,44 @@
 <p style="color:white;">Actualización 2.0</p>
     
 <style>
+.video-seccion{
+    width:90%;
+    max-width:1200px;
+    margin:120px auto;
+    text-align:center;
+    color:white;
+}
+
+.video-marco{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.video-marco video{
+    width:100%;
+    max-width:700px;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(255,255,255,0.2);
+}
+
+.foto-soporte{
+    width:180px;
+    border-radius:15px;
+    border:4px solid white;
+    box-shadow:0 0 15px rgba(255,255,255,0.2);
+}
+
+.izquierda{
+    transform:rotate(-8deg);
+}
+
+.derecha{
+    transform:rotate(8deg);
+}
+
 .razones{
     text-align:center;
     color:white;
@@ -422,6 +460,24 @@ button:hover{
         <p> 💕</p>
     </div>
 </div>
+<!-- video -->
+<div class="video-seccion">
+
+    <h2>🎥 Nuestro Video Especial ❤️</h2>
+
+    <div class="video-marco">
+
+        <img src="fotocine.jpg" class="foto-soporte izquierda">
+
+        <video id="videoAmor" controls>
+            <source src="video1.mp4" type="video/mp4">
+        </video>
+
+        <img src="fotocine2.jpg" class="foto-soporte derecha">
+
+    </div>
+
+</div>
 <!-- RAZONES -->
 <div class="razones">
 
@@ -451,6 +507,41 @@ button:hover{
 </div>
     <!-- RAZONES -->
 <script>
+const video =
+document.getElementById("videoAmor");
+
+video.addEventListener("play", ()=>{
+
+    for(let i=0;i<20;i++){
+
+        setTimeout(()=>{
+
+            let heart =
+            document.createElement("div");
+
+            heart.innerHTML = "❤️";
+
+            heart.classList.add("heart");
+
+            heart.style.left =
+            Math.random()*100+"vw";
+
+            heart.style.bottom = "-20px";
+
+            heart.style.fontSize =
+            (Math.random()*20+20)+"px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(()=>{
+                heart.remove();
+            },4000);
+
+        },i*80);
+
+    }
+
+});
         const razones = [
 
 "Me haces sonreír incluso en los días difíciles ❤️",
