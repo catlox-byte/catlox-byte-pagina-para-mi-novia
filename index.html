@@ -7,6 +7,31 @@
 <p style="color:white;">Actualización 3.0</p>
     
 <style>
+    /* luna */
+    .moon{
+
+    position:fixed;
+
+    top:40px;
+
+    right:60px;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:#f5f5f5;
+
+    box-shadow:
+
+    0 0 30px white,
+
+    0 0 60px white;
+
+}
+    
 .video-seccion{
     width:90%;
     max-width:1200px;
@@ -473,6 +498,8 @@ button:hover{
         <p> 💕</p>
     </div>
 </div>
+<!-- luna -->
+    <div class="moon"></div>
 <!-- video -->
 <div class="video-seccion">
 
@@ -621,7 +648,7 @@ for(let i=0;i<150;i++){
 
     star.classList.add("star");
 
-    let size=Math.random()*3+1;
+    let size=Math.random()*6+1;
 
     star.style.width=size+"px";
     star.style.height=size+"px";
