@@ -7,28 +7,94 @@
 <p style="color:white;">Actualización 3.0</p>
     
 <style>
-    /* luna */
-    .moon{
+    /* planetas */
+    .planeta{
 
     position:fixed;
 
-    top:40px;
+    z-index:-2;
 
-    right:60px;
+    pointer-events:none;
 
-    width:120px;
+    opacity:.85;
 
-    height:120px;
+}
+
+.saturno{
+
+    width:130px;
+
+    top:15%;
+
+    left:5%;
+
+}
+
+.marte{
+
+    width:90px;
+
+    right:10%;
+
+    top:55%;
+
+}
+
+.neptuno{
+
+    width:110px;
+
+    left:75%;
+
+    top:25%;
+
+}
+
+    .shooting-star{
+
+    position:fixed;
+
+    width:3px;
+
+    height:3px;
+
+    background:white;
 
     border-radius:50%;
 
-    background:#f5f5f5;
-
     box-shadow:
 
-    0 0 30px white,
+    0 0 10px white,
 
-    0 0 60px white;
+    0 0 20px white,
+
+    0 0 40px white;
+
+    z-index:-1;
+
+}
+/* Estrellas fugases */
+.shooting-star::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:2px;
+
+    background:linear-gradient(
+
+        to left,
+
+        white,
+
+        transparent
+
+    );
+
+    transform:rotate(0deg);
 
 }
     
@@ -296,7 +362,11 @@ button:hover{
 </style>
 </head>
 <body>
+<img src="saturno.png" class="planeta saturno">
 
+<img src="marte.png" class="planeta marte">
+
+<img src="neptuno.png" class="planeta neptuno">
 <!-- Fotos decorativas -->
 
 <img src="foto9.jpg" class="foto-lateral foto1">
@@ -498,8 +568,7 @@ button:hover{
         <p> 💕</p>
     </div>
 </div>
-<!-- luna -->
-    <div class="moon"></div>
+
 <!-- video -->
 <div class="video-seccion">
 
@@ -545,8 +614,48 @@ button:hover{
        ----- CADA DIA❤️-----
     </p>
 </div>
-    <!-- RAZONES -->
+   
 <script>
+     /*estrellas fugaces*/
+    function estrellaFugaz(){
+
+    let star=document.createElement("div");
+
+    star.classList.add("shooting-star");
+
+    star.style.left=Math.random()*window.innerWidth+"px";
+
+    star.style.top="-50px";
+
+    document.body.appendChild(star);
+
+    let x=0;
+    let y=0;
+
+    let animacion=setInterval(()=>{
+
+        x+=12;
+
+        y+=12;
+
+        star.style.transform=
+        `translate(${x}px,${y}px)`;
+
+        if(y>window.innerHeight){
+
+            clearInterval(animacion);
+
+            star.remove();
+
+        }
+
+    },16);
+
+}
+
+setInterval(estrellaFugaz,12000);
+    
+    /*boton ir al final*/
 const video =
 document.getElementById("videoAmor");
 
