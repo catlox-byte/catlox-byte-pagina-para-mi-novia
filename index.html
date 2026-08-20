@@ -61,21 +61,16 @@
 /* CONTENIDO */
 
 .cancion-contenido{
-
     position:relative;
-
     z-index:2;
 
-    display:flex;
+    display:grid;
+    grid-template-columns:380px 1fr;
 
     align-items:center;
-
-    justify-content:center;
-
     gap:60px;
 
     padding:60px 40px;
-
 }
 
 
@@ -106,15 +101,8 @@
 /* INFORMACIÓN */
 
 .info-cancion{
-
     width:100%;
-
     max-width:500px;
-
-    height:450px;
-
-    overflow-y:auto;
-
 }
 
 
@@ -251,6 +239,29 @@
 .controles-cancion button:hover{
 
     transform:scale(1.15);
+
+}
+    @media (max-width:700px){
+
+    .cancion-contenido{
+        grid-template-columns:1fr;
+        gap:30px;
+        padding:35px 20px;
+    }
+
+    .portada-cancion{
+        width:80%;
+        max-width:350px;
+        margin:auto;
+    }
+
+    .info-cancion{
+        max-width:100%;
+    }
+
+    .info-cancion h2{
+        font-size:30px;
+    }
 
 }
     /* planetas */
