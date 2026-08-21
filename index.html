@@ -264,6 +264,17 @@
     }
 
 }
+    .letra-cancion p{
+    opacity:0.25;
+    transition:all .3s ease;
+}
+
+.letra-cancion p.activa{
+    opacity:1;
+    color:white;
+    text-shadow:0 0 12px white;
+    transform:scale(1.03);
+}
     /* planetas */
 .planeta{
 
@@ -857,38 +868,19 @@ button:hover{
             </p>
 
             <!-- LETRA -->
-            <div class="letra-cancion" id="letraCancion">
+<div class="letra-cancion" id="letraCancion">
 
-                <p> LETRA</p>
+    <p data-time="0">Primera línea</p>
 
-                <p>
-                    En tus ojos, siempre estoy volviendo a casa (casa)
-                      Y no me voy a ningún lado
-                    Solo tú puedes llevarme allí
-                    En tus ojos, siempre estoy volviendo a casa
-                    Siempre estoy volviendo a casa
+    <p data-time="5">Segunda línea</p>
 
-                    Cada vez que me llevas abajo es como una inmersión más profunda
-                    Me doy la vuelta y estoy al otro lado, tú [¿?] mi fe
-                    Altibajos, los he vivido todos y nunca me dejes ir
-                    Y la vida sin ti es una que nunca conoceré
+    <p data-time="10">Tercera línea</p>
 
-                  En tus ojos, siempre estoy volviendo a casa (casa)
-                Y no me voy a ningún lado
-                Solo tú puedes llevarme allí
-                En tus ojos, siempre estoy volviendo a casa
-                Siempre estoy volviendo a casa
-                </p>
+    <p data-time="15">Cuarta línea</p>
 
-                <p>
-                     
-                </p>
+    <p data-time="20">Quinta línea</p>
 
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
     <!-- REPRODUCTOR -->
     <div class="reproductor-cancion">
@@ -1025,6 +1017,33 @@ function cancionSiguiente(){
     playCancion.innerHTML="⏸️";
 
 }
+    const lineas = document.querySelectorAll("#letraCancion p");
+
+audioCancion.addEventListener("timeupdate", () => {
+
+    const tiempo = audioCancion.currentTime;
+
+    let lineaActual = null;
+
+    lineas.forEach((linea) => {
+
+        const inicio = parseFloat(linea.dataset.time);
+
+        if (tiempo >= inicio) {
+            lineaActual = linea;
+        }
+
+    });
+
+    lineas.forEach((linea) => {
+        linea.classList.remove("activa");
+    });
+
+    if (lineaActual) {
+        lineaActual.classList.add("activa");
+    }
+
+});
      /*estrellas fugaces*/
     function estrellaFugaz(){
 
