@@ -1014,61 +1014,7 @@ button:hover{
 </div>
    
 <script>
- /*DROP CANCION ESTRELLAS*/
-    let dropActivado = false;
-
-const momentoDrop = 47; // 👈 CAMBIA 47 por el segundo del drop
-
-audioCancion.addEventListener("timeupdate", () => {
-
-    const tiempo = audioCancion.currentTime;
-
-    if (
-        tiempo >= momentoDrop &&
-        tiempo < momentoDrop + 6 &&
-        !dropActivado
-    ) {
-
-        dropActivado = true;
-
-        lanzarLluviaDeEstrellas();
-
-    }
-
-});
-
-
-function lanzarLluviaDeEstrellas(){
-
-    for(let i = 0; i < 25; i++){
-
-        setTimeout(() => {
-
-            const estrella =
-                document.createElement("div");
-
-            estrella.classList.add("shooting-star");
-
-            estrella.style.left =
-                (Math.random() * 70 + 20) + "vw";
-
-            estrella.style.top =
-                (Math.random() * 35 + 5) + "vh";
-
-            estrella.style.animation =
-                "caerEstrella 1.2s linear forwards";
-
-            document.body.appendChild(estrella);
-
-            setTimeout(() => {
-                estrella.remove();
-            }, 1300);
-
-        }, i * 120);
-
-    }
-
-}
+ 
      /*cancion dedicada*/
     const audioCancion =
 document.getElementById("audioCancion");
@@ -1191,6 +1137,61 @@ audioCancion.addEventListener("timeupdate", () => {
     }
 
 });
+    /*DROP CANCION ESTRELLAS*/
+    let dropActivado = false;
+
+const momentoDrop = 47; // 👈 CAMBIA 47 por el segundo del drop
+
+audioCancion.addEventListener("timeupdate", () => {
+
+    const tiempo = audioCancion.currentTime;
+
+    if (
+        tiempo >= momentoDrop &&
+        tiempo < momentoDrop + 6 &&
+        !dropActivado
+    ) {
+
+        dropActivado = true;
+
+        lanzarLluviaDeEstrellas();
+
+    }
+
+});
+
+
+function lanzarLluviaDeEstrellas(){
+
+    for(let i = 0; i < 25; i++){
+
+        setTimeout(() => {
+
+            const estrella =
+                document.createElement("div");
+
+            estrella.classList.add("shooting-star");
+
+            estrella.style.left =
+                (Math.random() * 70 + 20) + "vw";
+
+            estrella.style.top =
+                (Math.random() * 35 + 5) + "vh";
+
+            estrella.style.animation =
+                "caerEstrella 1.2s linear forwards";
+
+            document.body.appendChild(estrella);
+
+            setTimeout(() => {
+                estrella.remove();
+            }, 1300);
+
+        }, i * 120);
+
+    }
+
+}
      /*estrellas fugaces*/
     function estrellaFugaz(){
 
