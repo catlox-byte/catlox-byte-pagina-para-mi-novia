@@ -101,8 +101,19 @@
 /* INFORMACIÓN */
 
 .info-cancion{
+
     width:100%;
+
     max-width:500px;
+
+    height:450px;
+
+    overflow-y:auto;
+
+    scroll-behavior:smooth;
+
+    padding-right:10px;
+
 }
 
 
@@ -146,6 +157,30 @@
     font-size:18px;
 
     font-weight:bold;
+
+}
+    /* LETRA RESALTE */
+    .letra-cancion p{
+
+    opacity:0.25;
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+
+}
+
+.letra-cancion p.activa{
+
+    opacity:1;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 20px rgba(255,255,255,.5);
+
+    transform:scale(1.04);
 
 }
 
@@ -1061,7 +1096,25 @@ audioCancion.addEventListener("timeupdate", () => {
     });
 
     if (lineaActual) {
+
         lineaActual.classList.add("activa");
+
+        const contenedor =
+            document.getElementById("letraCancion");
+
+        const posicion =
+            lineaActual.offsetTop -
+            (contenedor.clientHeight / 2) +
+            (lineaActual.clientHeight / 2);
+
+        contenedor.scrollTo({
+
+            top: posicion,
+
+            behavior: "smooth"
+
+        });
+
     }
 
 });
