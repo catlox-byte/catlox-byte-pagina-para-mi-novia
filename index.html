@@ -119,19 +119,8 @@
 /* INFORMACIÓN */
 
 .info-cancion{
-
     width:100%;
-
     max-width:500px;
-
-    height:450px;
-
-    overflow-y:auto;
-
-    scroll-behavior:smooth;
-
-    padding-right:10px;
-
 }
 
 
@@ -169,13 +158,19 @@
 /* LETRA */
 
 .letra-cancion{
+    height:260px;
+    overflow-y:auto;
+    scroll-behavior:smooth;
 
-    line-height:2;
+    padding:10px 15px;
 
-    font-size:18px;
-
-    font-weight:bold;
-
+    box-sizing:border-box;
+}
+    .letra-scroll{
+    height:250px;
+    overflow-y:auto;
+    scroll-behavior:smooth;
+    padding:10px 15px;
 }
     /* LETRA RESALTE */
     .letra-cancion p{
@@ -904,58 +899,60 @@ button:hover{
 
         <!-- PORTADA -->
         <div class="portada-cancion">
-            <img src="portada-cancion.jpg" alt="Portada de la canción">
-        </div>
-
-        <!-- INFORMACIÓN -->
-        <div class="info-cancion">
-
-            <p class="etiqueta-cancion">
-                 UNA CANCIÓN QUE ME RECUERDA A TI
-            </p>
-
-            <h2>IN YOUR EYES</h2>
-
-            <p class="artista">
-                Alesso Y Onerepublic
-            </p>
-
-            <!-- LETRA -->
-<div class="letra-cancion" id="letraCancion">
-
-    <p data-time="19">CADA VEZ QUE ME HACES CAER ES COMO UNA IMERSION MAS PROFUNDA </p>
-
-    <p data-time="22">ME DOY LA VUELTA Y ESTOY DEL OTRO LADO</p>
-
-    <p data-time="25">ME AYUDAS A ENCONTRAR MI FE</p>
-
-    <p data-time="30">ALTIBAJOS</p>
-
-    <p data-time="35">LOS HE VIVIDO TODOS NUNCA ME HAS DEJADO IR</p>
-    
-    <p data-time="39">SI, LA VIDA SIN TI ES ALGO QUE NUNCA CONOCERE</p>
-
-    <p data-time="43">ERES MI REFUGIO</p>
-
-    <p data-time="49">EN TUS OJOS</p>
-
-    <p data-time="52">EL UNICO AMOR QUE CONOZCO</p>
-
-    <p data-time="56">EN TUS OJOS</p>
-
-    <p data-time="60">SIEMPRE VUELVO A CASA</p>
-
-    <p data-time="63">Y NO ME VOY A IR A NINGUN SITIO</p>
-
-    <p data-time="68">SOLO TU PÚEDES LLEVARME A MI</p>
-
-    <p data-time="71">EN TUS OJOS</p>
-
-    <p data-time="75">SIEMPRE VUELVO A CASA</p>
-
-    <p data-time="79">TE AMO</p>
+    <img src="portada-cancion.jpg" alt="Portada de la canción">
 </div>
 
+<!-- INFORMACIÓN -->
+<div class="info-cancion">
+
+    <!-- ESTA PARTE SE QUEDA FIJA -->
+    <p class="etiqueta-cancion">
+        UNA CANCIÓN QUE ME RECUERDA A TI
+    </p>
+
+    <h2>IN YOUR EYES</h2>
+
+    <p class="artista">
+        Alesso Y Onerepublic
+    </p>
+
+
+    <!-- LETRA -->
+    <div class="letra-cancion" id="letraCancion">
+
+        <p data-time="19">CADA VEZ QUE ME HACES CAER ES COMO UNA INMERSIÓN MÁS PROFUNDA</p>
+
+        <p data-time="22">ME DOY LA VUELTA Y ESTOY DEL OTRO LADO</p>
+
+        <p data-time="25">ME AYUDAS A ENCONTRAR MI FE</p>
+
+        <p data-time="30">ALTIBAJOS</p>
+
+        <p data-time="35">LOS HE VIVIDO TODOS, NUNCA ME HAS DEJADO IR</p>
+        
+        <p data-time="39">SÍ, LA VIDA SIN TI ES ALGO QUE NUNCA CONOCERÉ</p>
+
+        <p data-time="43">ERES MI REFUGIO</p>
+
+        <p data-time="49">EN TUS OJOS</p>
+
+        <p data-time="52">EL ÚNICO AMOR QUE CONOZCO</p>
+
+        <p data-time="56">EN TUS OJOS</p>
+
+        <p data-time="60">SIEMPRE VUELVO A CASA</p>
+
+        <p data-time="63">Y NO ME VOY A IR A NINGÚN SITIO</p>
+
+        <p data-time="68">SOLO TÚ PUEDES LLEVARME A MÍ</p>
+
+        <p data-time="71">EN TUS OJOS</p>
+
+        <p data-time="75">SIEMPRE VUELVO A CASA</p>
+
+        <p data-time="79">TE AMO ❤️</p>
+
+    </div>
     <!-- REPRODUCTOR -->
     <div class="reproductor-cancion">
 
