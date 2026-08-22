@@ -1123,7 +1123,8 @@ audioCancion.addEventListener("timeupdate", () => {
             (contenedor.clientHeight / 2) +
             (lineaActual.clientHeight / 2);
 
-        contenedor.scrollTo({
+       contenedor.scrollTo({
+    top: Math.max(0, posicion),
 
             top: posicion,
 
