@@ -1264,8 +1264,11 @@ function lanzarLluviaDeEstrellas(){
 
             const estrella =
                 document.createElement("div");
-
-            estrella.classList.add("shooting-star");
+    
+                 estrella.classList.add(
+            "shooting-star",
+               "drop-star"
+        );
 
             estrella.style.left =
                 (Math.random() * 70 + 20) + "vw";
