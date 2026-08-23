@@ -378,37 +378,100 @@
     z-index:-1;
 
 }
-/* Estrellas fugases *//*  drop estrellas fugaces cancion 1 */
+/* =========================
+   ESTRELLAS FUGACES
+========================= */
+
 .shooting-star{
+
     position:absolute;
 
-    width:2px;
-    height:2px;
+    width:4px;
+    height:4px;
 
     border-radius:50%;
 
     background:white;
 
     box-shadow:
-        0 0 10px white,
-        0 0 20px white;
+        0 0 8px white,
+        0 0 15px white,
+        0 0 25px white;
 
     z-index:10;
+
 }
-    @keyframes caerEstrella{
+
+
+/* COLA DE LA ESTRELLA */
+
+.shooting-star::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:2px;
+
+    background:linear-gradient(
+        to left,
+        white,
+        transparent
+    );
+
+    right:2px;
+    top:1px;
+
+    transform:rotate(0deg);
+
+}
+
+
+/* =========================
+   ESTRELLAS DEL DROP
+========================= */
+
+.drop-star{
+
+    position:fixed;
+
+    width:5px;
+    height:5px;
+
+    z-index:9999;
+
+}
+
+
+/* =========================
+   ANIMACIÓN DEL DROP
+========================= */
+
+@keyframes caerEstrella{
 
     0%{
-        transform:translate(0,0);
+
+        transform:
+            translate(0,0);
+
         opacity:0;
+
     }
 
-    15%{
+    10%{
+
         opacity:1;
+
     }
 
     100%{
-        transform:translate(-250px,250px);
+
+        transform:
+            translate(-350px,350px);
+
         opacity:0;
+
     }
 
 }
