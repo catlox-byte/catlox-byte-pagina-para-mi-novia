@@ -1174,20 +1174,14 @@ audioCancion.addEventListener("timeupdate", () => {
 
         lineaActual.classList.add("activa");
 
-        const contenedor =
-            document.getElementById("letraCancion");
 
-        const posicionCentro =
-            lineaActual.offsetTop
-            - (contenedor.clientHeight / 2)
-            + (lineaActual.offsetHeight / 2);
+        lineaActual.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  
+    });
 
-        contenedor.scrollTo({
-            top: Math.max(0, posicionCentro),
-            behavior: "smooth"
-        });
-
-    }
+ }
 
 });
     
