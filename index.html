@@ -1177,20 +1177,19 @@ audioCancion.addEventListener("timeupdate", () => {
         const contenedor =
             document.getElementById("letraCancion");
 
-        const posicion =
-            lineaActual.offsetTop -
-            (contenedor.clientHeight / 2) +
-            (lineaActual.clientHeight / 2);
+        const posicionCentro =
+            lineaActual.offsetTop
+            - (contenedor.clientHeight / 2)
+            + (lineaActual.offsetHeight / 2);
 
-       contenedor.scrollTo({
-    top: Math.max(0, posicion),
-
-            top: posicion,
-
+        contenedor.scrollTo({
+            top: Math.max(0, posicionCentro),
             behavior: "smooth"
-
         });
 
+    }
+
+});
     }
 
 });
@@ -1198,7 +1197,7 @@ audioCancion.addEventListener("timeupdate", () => {
 
 let dropActivado = false;
 
-const momentoDrop = 79;
+const momentoDrop = 92;
 
 
 audioCancion.addEventListener("timeupdate", () => {
