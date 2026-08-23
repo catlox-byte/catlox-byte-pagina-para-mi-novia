@@ -7,24 +7,8 @@
 <p style="color:white;">Actualización 3.0</p>
     
 <style>
- /*  drop estrellas fugaces cancion 1 */
-    @keyframes caerEstrella{
-
-    0%{
-        transform:translate(0,0);
-        opacity:0;
-    }
-
-    15%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translate(-250px,250px);
-        opacity:0;
-    }
-
-}
+ 
+ 
     /*  cancion */
     .cancion-seccion{
 
@@ -394,8 +378,40 @@
     z-index:-1;
 
 }
-/* Estrellas fugases */
+/* Estrellas fugases *//*  drop estrellas fugaces cancion 1 */
+.shooting-star{
+    position:absolute;
 
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 20px white;
+
+    z-index:10;
+}
+    @keyframes caerEstrella{
+
+    0%{
+        transform:translate(0,0);
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translate(-250px,250px);
+        opacity:0;
+    }
+
+}
 
     
 .video-seccion{
@@ -1138,10 +1154,12 @@ audioCancion.addEventListener("timeupdate", () => {
     }
 
 });
-    /*DROP CANCION ESTRELLAS*/
-    let dropActivado = false;
+ /* DROP CANCION ESTRELLAS */
 
-const momentoDrop = 17; // 
+let dropActivado = false;
+
+const momentoDrop = 17;
+
 
 audioCancion.addEventListener("timeupdate", () => {
 
@@ -1153,9 +1171,20 @@ audioCancion.addEventListener("timeupdate", () => {
         !dropActivado
     ) {
 
+        console.log("🔥 DROP ACTIVADO 🔥");
+
         dropActivado = true;
 
         lanzarLluviaDeEstrellas();
+
+    }
+
+    /* Permite volver a activar el drop
+       si regresas antes del segundo 17 */
+
+    if (tiempo < momentoDrop - 1) {
+
+        dropActivado = false;
 
     }
 
@@ -1163,6 +1192,8 @@ audioCancion.addEventListener("timeupdate", () => {
 
 
 function lanzarLluviaDeEstrellas(){
+
+    console.log("☄️ LANZANDO ESTRELLAS ☄️");
 
     for(let i = 0; i < 25; i++){
 
