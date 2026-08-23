@@ -403,29 +403,6 @@
 }
 
 
-/* COLA DE LA ESTRELLA */
-
-.shooting-star::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:120px;
-    height:2px;
-
-    background:linear-gradient(
-        to left,
-        white,
-        transparent
-    );
-
-    right:2px;
-    top:1px;
-
-    transform:rotate(0deg);
-
-}
 
 
 /* =========================
@@ -1258,7 +1235,7 @@ function lanzarLluviaDeEstrellas(){
 
     console.log("☄️ LANZANDO ESTRELLAS ☄️");
 
-    for(let i = 0; i < 25; i++){
+    for(let i = 0; i < 60; i++){
 
         setTimeout(() => {
 
@@ -1285,7 +1262,7 @@ function lanzarLluviaDeEstrellas(){
                 estrella.remove();
             }, 1300);
 
-        }, i * 120);
+        }, i * 200);
 
     }
 
