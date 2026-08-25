@@ -1176,23 +1176,7 @@ function cancionSiguiente(){
     playCancion.innerHTML="⏸️";
 
 }
-    const lineas = document.querySelectorAll("#letraCancion p");
 
-audioCancion.addEventListener("timeupdate", () => {
-
-    const tiempo = audioCancion.currentTime;
-
-    let lineaActual = null;
-
-    lineas.forEach((linea) => {
-
-        const inicio = parseFloat(linea.dataset.time);
-
-        if (tiempo >= inicio) {
-            lineaActual = 
-        }
-
-    });
 
     lineas.forEach((linea) => {
         linea.classList.remove("activa");
