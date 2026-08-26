@@ -1112,7 +1112,7 @@ const canciones = [
 
         frase: "UNA CANCIÓN QUE ME RECUERDA A TI",
 
-        drop: 92,
+        drops: [92],
 
         letra: [
 
@@ -1149,7 +1149,7 @@ const canciones = [
 
         frase: "UNA CANCIÓN QUE ME RECUERDA A TI",
 
-        drop: null,
+        drops: [90],
 
         letra: [
 
@@ -1170,7 +1170,7 @@ const canciones = [
             { tiempo: 103, texto: "VOY A CAMBIAR MI CORAZON PARA EMPEZAR DE NUEVO" },
             { tiempo: 109, texto: "CONVERTIRME EN ALGUIEN NUEVO" },
             { tiempo: 112, texto: "SI NO PUEDO ESTAR CONTIGO" },
-            { tiempo: 116, texto: "PREFIERO DEJARLO TOODO " },
+            { tiempo: 116, texto: "PREFIERO DEJARLO TODO " },
             { tiempo: 120, texto: "..." },
             { tiempo: 135, texto: "TODO ES POR NUESTRO AMOR" },
             { tiempo: 139, texto: "OH, TODO ES POR NUESTRO AMOR" },
@@ -1193,7 +1193,7 @@ const canciones = [
 
 let indiceCancionActual = 0;
 
-let dropActivado = false;
+let dropsActivados = [];
 
 
 /* =========================
@@ -1391,34 +1391,32 @@ audioCancion.addEventListener(
 
     /* DROP */
 
-    const momentoDrop =
-    canciones[indiceCancionActual].drop;
+/* DROPS DE ESTRELLAS */
 
-    if(
+const drops =
+canciones[indiceCancionActual].drops || [];
 
-        momentoDrop !== null &&
+drops.forEach((momentoDrop, indice) => {
 
+    if (
         tiempo >= momentoDrop &&
+        tiempo < momentoDrop + 2 &&
+        !dropsActivados[indice]
+    ) {
 
-        tiempo < momentoDrop + 6 &&
+        console.log("☄️ DROP ACTIVADO:", momentoDrop);
 
-        !dropActivado
-
-    ){
-
-        dropActivado = true;
+        dropsActivados[indice] = true;
 
         lanzarLluviaDeEstrellas();
 
     }
 
+    /* Permite activar otra vez si retrocedes */
 
-    if(
-        momentoDrop !== null &&
-        tiempo < momentoDrop - 1
-    ){
+    if (tiempo < momentoDrop - 1) {
 
-        dropActivado = false;
+        dropsActivados[indice] = false;
 
     }
 
