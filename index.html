@@ -985,8 +985,11 @@ button:hover{
     <div class="cancion-contenido">
 
         <!-- PORTADA -->
-        <div class="portada-cancion">
-    <img src="portada-cancion.jpg" alt="Portada de la canción">
+       <div class="portada-cancion">
+    <img 
+        id="portadaCancion"
+        src="portada-cancion.jpg" 
+        alt="Portada de la canción">
 </div>
 
 <!-- INFORMACIÓN -->
@@ -997,11 +1000,11 @@ button:hover{
         UNA CANCIÓN QUE ME RECUERDA A TI
     </p>
 
-    <h2>IN YOUR EYES</h2>
+   <h2 id="tituloCancion">IN YOUR EYES</h2>
 
-    <p class="artista">
-        Alesso Y Onerepublic
-    </p>
+    <p class="artista" id="artistaCancion">
+    Alesso Y OneRepublic
+</p>
 
 
     <!-- LETRA -->
@@ -1099,8 +1102,11 @@ button:hover{
    
 <script>
  
-     /*cancion dedicada*/
-    const audioCancion =
+/* =====================================
+   REPRODUCTOR MULTICANCIÓN
+===================================== */
+
+const audioCancion =
 document.getElementById("audioCancion");
 
 const playCancion =
@@ -1109,6 +1115,165 @@ document.getElementById("playCancion");
 const progresoCancion =
 document.getElementById("progresoCancion");
 
+const portadaCancion =
+document.getElementById("portadaCancion");
+
+const tituloCancion =
+document.getElementById("tituloCancion");
+
+const artistaCancion =
+document.getElementById("artistaCancion");
+
+const fraseCancion =
+document.getElementById("fraseCancion");
+
+const letraCancion =
+document.getElementById("letraCancion");
+
+
+/* =========================
+   CANCIONES
+========================= */
+
+const canciones = [
+
+    {
+        titulo: "IN YOUR EYES",
+
+        artista: "Alesso y OneRepublic",
+
+        portada: "portada-cancion.jpg",
+
+        audio: "cancion.mp3",
+
+        frase: "UNA CANCIÓN QUE ME RECUERDA A TI",
+
+        drop: 92,
+
+        letra: [
+
+            { tiempo: 19, texto: "CADA VEZ QUE ME HACES CAER ES COMO UNA INMERSIÓN MÁS PROFUNDA" },
+            { tiempo: 22, texto: "ME DOY LA VUELTA Y ESTOY DEL OTRO LADO" },
+            { tiempo: 25, texto: "ME AYUDAS A ENCONTRAR MI FE" },
+            { tiempo: 30, texto: "ALTIBAJOS" },
+            { tiempo: 35, texto: "LOS HE VIVIDO TODOS, NUNCA ME HAS DEJADO IR" },
+            { tiempo: 39, texto: "SÍ, LA VIDA SIN TI ES ALGO QUE NUNCA CONOCERÉ" },
+            { tiempo: 43, texto: "ERES MI REFUGIO" },
+            { tiempo: 49, texto: "EN TUS OJOS" },
+            { tiempo: 52, texto: "EL ÚNICO AMOR QUE CONOZCO" },
+            { tiempo: 56, texto: "EN TUS OJOS" },
+            { tiempo: 60, texto: "SIEMPRE VUELVO A CASA" },
+            { tiempo: 63, texto: "Y NO ME VOY A IR A NINGÚN SITIO" },
+            { tiempo: 68, texto: "SOLO TÚ PUEDES LLEVARME A MÍ" },
+            { tiempo: 71, texto: "EN TUS OJOS" },
+            { tiempo: 75, texto: "SIEMPRE VUELVO A CASA" },
+            { tiempo: 79, texto: "TE AMO ❤️" }
+
+        ]
+
+    },
+
+
+    {
+        titulo: "OUR LOVE",
+
+        artista: "Avicii",
+
+        portada: "our-love.jpg",
+
+        audio: "our-love.mp3",
+
+        frase: "UNA CANCIÓN QUE ME RECUERDA A TI",
+
+        drop: null,
+
+        letra: [
+
+            { tiempo: 0, texto: "PRIMERA LÍNEA" }
+
+        ]
+
+    }
+
+];
+
+
+/* CANCIÓN ACTUAL */
+
+let indiceCancionActual = 0;
+
+let dropActivado = false;
+
+
+/* =========================
+   CARGAR CANCIÓN
+========================= */
+
+function cargarCancion(indice){
+
+    const cancion = canciones[indice];
+
+    audioCancion.pause();
+
+    /* Información */
+
+    portadaCancion.src =
+    cancion.portada;
+
+    tituloCancion.innerHTML =
+    cancion.titulo;
+
+    artistaCancion.innerHTML =
+    cancion.artista;
+
+    fraseCancion.innerHTML =
+    cancion.frase;
+
+
+    /* Audio */
+
+    audioCancion.src =
+    cancion.audio;
+
+    audioCancion.load();
+
+
+    /* Letra */
+
+    letraCancion.innerHTML = "";
+
+    cancion.letra.forEach((linea) => {
+
+        const p =
+        document.createElement("p");
+
+        p.dataset.time =
+        linea.tiempo;
+
+        p.innerHTML =
+        linea.texto;
+
+        letraCancion.appendChild(p);
+
+    });
+
+
+    /* Reiniciar */
+
+    progresoCancion.style.width =
+    "0%";
+
+    playCancion.innerHTML =
+    "▶️";
+
+    dropActivado = false;
+
+}
+
+
+/* =========================
+   PLAY / PAUSA
+========================= */
 
 function reproducirCancion(){
 
@@ -1116,75 +1281,90 @@ function reproducirCancion(){
 
         audioCancion.play();
 
-        playCancion.innerHTML="⏸️";
+        playCancion.innerHTML =
+        "⏸️";
 
     }else{
 
         audioCancion.pause();
 
-        playCancion.innerHTML="▶️";
+        playCancion.innerHTML =
+        "▶️";
 
     }
 
 }
 
 
-/* ACTUALIZAR BARRA */
-
-audioCancion.addEventListener("timeupdate",()=>{
-
-    if(audioCancion.duration){
-
-        let porcentaje =
-        (audioCancion.currentTime /
-        audioCancion.duration)*100;
-
-        progresoCancion.style.width =
-        porcentaje+"%";
-
-    }
-
-});
-
-
-/* CUANDO TERMINA */
-
-audioCancion.addEventListener("ended",()=>{
-
-    playCancion.innerHTML="▶️";
-
-});
-
-
-/* BOTÓN ANTERIOR */
+/* =========================
+   ANTERIOR
+========================= */
 
 function cancionAnterior(){
 
-    audioCancion.currentTime=0;
+    indiceCancionActual--;
+
+    if(indiceCancionActual < 0){
+
+        indiceCancionActual =
+        canciones.length - 1;
+
+    }
+
+    cargarCancion(indiceCancionActual);
 
 }
 
 
-/* BOTÓN SIGUIENTE */
+/* =========================
+   SIGUIENTE
+========================= */
 
 function cancionSiguiente(){
 
-    audioCancion.currentTime=0;
+    indiceCancionActual++;
 
-    audioCancion.play();
+    if(indiceCancionActual >= canciones.length){
 
-    playCancion.innerHTML="⏸️";
+        indiceCancionActual = 0;
+
+    }
+
+    cargarCancion(indiceCancionActual);
 
 }
 
-/* LETRA SINCRONIZADA */
 
-const lineas =
-document.querySelectorAll("#letraCancion p");
+/* =========================
+   BARRA + LETRA + DROP
+========================= */
 
-audioCancion.addEventListener("timeupdate", () => {
+audioCancion.addEventListener(
+"timeupdate",
+() => {
 
-    const tiempo = audioCancion.currentTime;
+    const tiempo =
+    audioCancion.currentTime;
+
+
+    /* BARRA */
+
+    if(audioCancion.duration){
+
+        const porcentaje =
+        (tiempo /
+        audioCancion.duration) * 100;
+
+        progresoCancion.style.width =
+        porcentaje + "%";
+
+    }
+
+
+    /* LETRA */
+
+    const lineas =
+    letraCancion.querySelectorAll("p");
 
     let lineaActual = null;
 
@@ -1194,49 +1374,44 @@ audioCancion.addEventListener("timeupdate", () => {
         parseFloat(linea.dataset.time);
 
         if(tiempo >= inicio){
+
             lineaActual = linea;
+
         }
 
     });
 
-
-    /* Quitamos iluminación anterior */
-
     lineas.forEach((linea) => {
-        linea.classList.remove("activa");
+
+        linea.classList.remove(
+        "activa");
+
     });
-
-
-    /* Iluminamos la línea actual */
 
     if(lineaActual){
 
-        lineaActual.classList.add("activa");
+        lineaActual.classList.add(
+        "activa");
 
     }
 
-});
-    
 
+    /* DROP */
 
- /* DROP CANCION ESTRELLAS */
+    const momentoDrop =
+    canciones[indiceCancionActual].drop;
 
-let dropActivado = false;
+    if(
 
-const momentoDrop = 92;
+        momentoDrop !== null &&
 
-
-audioCancion.addEventListener("timeupdate", () => {
-
-    const tiempo = audioCancion.currentTime;
-
-    if (
         tiempo >= momentoDrop &&
-        tiempo < momentoDrop + 6 &&
-        !dropActivado
-    ) {
 
-        console.log("🔥 DROP ACTIVADO 🔥");
+        tiempo < momentoDrop + 6 &&
+
+        !dropActivado
+
+    ){
 
         dropActivado = true;
 
@@ -1244,10 +1419,11 @@ audioCancion.addEventListener("timeupdate", () => {
 
     }
 
-    /* Permite volver a activar el drop
-       si regresas antes del segundo 17 */
 
-    if (tiempo < momentoDrop - 1) {
+    if(
+        momentoDrop !== null &&
+        tiempo < momentoDrop - 1
+    ){
 
         dropActivado = false;
 
@@ -1256,35 +1432,56 @@ audioCancion.addEventListener("timeupdate", () => {
 });
 
 
-function lanzarLluviaDeEstrellas(){
+/* =========================
+   CUANDO TERMINA
+========================= */
 
-    console.log("☄️ LANZANDO ESTRELLAS ☄️");
+audioCancion.addEventListener(
+"ended",
+() => {
+
+    playCancion.innerHTML =
+    "▶️";
+
+});
+
+
+/* =========================
+   LLUVIA DE ESTRELLAS
+========================= */
+
+function lanzarLluviaDeEstrellas(){
 
     for(let i = 0; i < 60; i++){
 
         setTimeout(() => {
 
             const estrella =
-                document.createElement("div");
-    
-                 estrella.classList.add(
-            "shooting-star",
-               "drop-star"
-        );
+            document.createElement("div");
+
+            estrella.classList.add(
+                "shooting-star",
+                "drop-star"
+            );
 
             estrella.style.left =
-                (Math.random() * 70 + 20) + "vw";
+            (Math.random() * 70 + 20)
+            + "vw";
 
             estrella.style.top =
-                (Math.random() * 35 + 5) + "vh";
+            (Math.random() * 35 + 5)
+            + "vh";
 
             estrella.style.animation =
-                "caerEstrella 1.2s linear forwards";
+            "caerEstrella 1.2s linear forwards";
 
-            document.body.appendChild(estrella);
+            document.body.appendChild(
+            estrella);
 
             setTimeout(() => {
+
                 estrella.remove();
+
             }, 1300);
 
         }, i * 200);
