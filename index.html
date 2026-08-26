@@ -1135,7 +1135,7 @@ audioCancion.addEventListener("timeupdate",()=>{
 
     if(audioCancion.duration){
 
-        let porcentaje 
+        let porcentaje =
         (audioCancion.currentTime /
         audioCancion.duration)*100;
 
@@ -1177,23 +1177,45 @@ function cancionSiguiente(){
 
 }
 
+/* LETRA SINCRONIZADA */
+
+const lineas =
+document.querySelectorAll("#letraCancion p");
+
+audioCancion.addEventListener("timeupdate", () => {
+
+    const tiempo = audioCancion.currentTime;
+
+    let lineaActual = null;
+
+    lineas.forEach((linea) => {
+
+        const inicio =
+        parseFloat(linea.dataset.time);
+
+        if(tiempo >= inicio){
+            lineaActual = linea;
+        }
+
+    });
+
+
+    /* Quitamos iluminación anterior */
 
     lineas.forEach((linea) => {
         linea.classList.remove("activa");
     });
 
-    if (lineaActual) {
+
+    /* Iluminamos la línea actual */
+
+    if(lineaActual){
 
         lineaActual.classList.add("activa");
 
+    }
 
-        lineaActual.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  
-    });
-
-}
+});
     
 
 
