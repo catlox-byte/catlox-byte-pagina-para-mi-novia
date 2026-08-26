@@ -1257,7 +1257,7 @@ function cargarCancion(indice){
     playCancion.innerHTML =
     "▶️";
 
-    dropActivado = false;
+    dropsActivados = [];
 
 }
 /* CARGAR PRIMERA CANCIÓN AL ABRIR LA PÁGINA */
@@ -1419,6 +1419,8 @@ drops.forEach((momentoDrop, indice) => {
         dropsActivados[indice] = false;
 
     }
+
+});
 
 });
 
