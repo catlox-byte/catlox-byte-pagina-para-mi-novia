@@ -748,6 +748,118 @@ button:hover{
     line-height:1.8;
 }
 
+
+/* BOTÓN Y MAZO DE FOTOS */
+
+.boton-galeria {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto 35px;
+    padding: 20px;
+    color: white;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+.mazo-fotos {
+    position: relative;
+    width: 210px;
+    height: 250px;
+    margin: 0 auto 20px;
+}
+
+.mazo-fotos img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 3px solid white;
+    box-shadow: 0 0 20px #ffffff30;
+    transition: transform 0.7s ease;
+}
+
+.mazo-fotos img:nth-child(1) {
+    transform: rotate(-9deg);
+}
+
+.mazo-fotos img:nth-child(2) {
+    transform: rotate(6deg);
+}
+
+.mazo-fotos img:nth-child(3) {
+    transform: rotate(-3deg);
+}
+
+.mazo-fotos img:nth-child(4) {
+    transform: rotate(10deg);
+}
+
+.boton-galeria:hover .mazo-fotos img {
+    transform: rotate(0deg) translateY(-5px);
+}
+
+#textoGaleria {
+    display: block;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* GALERÍA PLEGABLE */
+
+.galeria-fotos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-15px);
+    transition:
+        max-height 1.2s ease,
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.galeria-fotos.abierta {
+    max-height: 30000px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.galeria-fotos .foto {
+    margin: 0;
+    min-width: 0;
+}
+
+.galeria-fotos .foto img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.galeria-fotos .foto p {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    .galeria-fotos {
+        grid-template-columns: 1fr;
+    }
+
+    .galeria-fotos .foto img {
+        height: auto;
+        max-height: 450px;
+        object-fit: contain;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -811,155 +923,185 @@ button:hover{
 
     <h2>Mi Novia ❤️</h2>
 
-    <div class="foto">
-        <img src="foto1.jpg">
-        <p>Uno de mis recuerdos favoritos contigo ✨</p>
-    </div>
+    <button class="boton-galeria" id="botonGaleria"
+        onclick="alternarGaleria()"
+        aria-expanded="false">
 
-    <div class="foto">
-        <img src="foto2.jpg">
-        <p>Lo bonita que eres ❤️</p>
-    </div>
+        <div class="mazo-fotos">
+            <img src="foto1.jpg" alt="">
+            <img src="foto2.jpg" alt="">
+            <img src="foto3.jpg" alt="">
+            <img src="foto4.jpg" alt="">
+        </div>
 
-    <div class="foto">
-        <img src="foto3.jpg">
-        <p>Tu poniendote mas guapa 💕</p>
-    </div>
+        <span id="textoGaleria">Toca para descubrir nuestros recuerdos ❤️</span>
+    </button>
 
-    <div class="foto">
-        <img src="foto4.jpg">
-        <p> ✨</p>
-    </div>
+    <div class="galeria-fotos" id="galeriaFotos">
 
-    <div class="foto">
-        <img src="foto5.jpg">
-        <p> ❤️</p>
-    </div>
-
-    <div class="foto">
-        <img src="foto6.jpg">
-        <p> 💕</p>
-    </div>
         <div class="foto">
-        <img src="foto7.jpg">
-        <p> ✨</p>
-    </div>
+            <img src="foto1.jpg" alt="Recuerdo 1">
+            <p>Uno de mis recuerdos favoritos contigo ✨</p>
+        </div>
 
-    <div class="foto">
-        <img src="foto8.jpg">
-        <p> ❤️</p>
-    </div>
+        <div class="foto">
+            <img src="foto2.jpg" alt="Recuerdo 2">
+            <p>Lo bonita que eres ❤️</p>
+        </div>
 
-    <div class="foto">
-        <img src="foto9.jpg">
-        <p> 💕</p>
-    </div>
-        <div class="foto">
-        <img src="foto10.jpg">
-        <p> ✨</p>
-    </div>
+          <div class="foto">
+            <img src="foto3.jpg" alt="Recuerdo 3">
+            <p>Tu poniéndote más guapa 💕</p>
+        </div>
 
-    <div class="foto">
-        <img src="foto11.jpg">
-        <p> ❤️</p>
-    </div>
+          <div class="foto">
+            <img src="foto4.jpg" alt="Recuerdo 4">
+            <p>✨</p>
+        </div>
 
-    <div class="foto">
-        <img src="foto12.jpg">
-        <p> 💕</p>
-    </div>
         <div class="foto">
-        <img src="foto13.jpg">
-        <p> 💕</p>
-    </div>
-    <div class="foto">
-        <img src="foto15.jpg">
-        <p> ❤️</p>
-    </div>
+    <img src="foto5.jpg">
+    <p> ❤️</p>
+</div>
 
-    <div class="foto">
-        <img src="foto16.jpg">
-        <p>💕</p>
-    </div>
+        <div class="foto">
+    <img src="foto6.jpg">
+    <p> 💕</p>
+</div>
 
-    <div class="foto">
-        <img src="foto17.jpg">
-        <p> ✨</p>
-    </div>
+        <div class="foto">
+    <img src="foto7.jpg">
+    <p> ✨</p>
+</div>
 
-    <div class="foto">
-        <img src="foto18.jpg">
-        <p> ❤️</p>
-    </div>
+        <div class="foto">
+    <img src="foto8.jpg">
+    <p> ❤️</p>
+</div>
 
-    <div class="foto">
-        <img src="foto19.jpg">
-        <p> 💕</p>
-    </div>
         <div class="foto">
-        <img src="foto20.jpg">
-        <p> ✨</p>
-    </div>
+    <img src="foto9.jpg">
+    <p> ❤️</p>
+</div>
 
-    <div class="foto">
-        <img src="foto21.jpg">
-        <p> ❤️</p>
-    </div>
+        <div class="foto">
+    <img src="foto10.jpg">
+    <p> ❤️</p>
+</div>
 
-    <div class="foto">
-        <img src="foto22.jpg">
-        <p> 💕</p>
-    </div>
         <div class="foto">
-        <img src="foto23.jpg">
-        <p> ✨</p>
-    </div>
-    
-    <div class="foto">
-        <img src="foto24.jpg">
-        <p> ❤️</p>
-    </div>
+    <img src="foto11.jpg">
+    <p> ❤️</p>
+</div>
 
-    <div class="foto">
-        <img src="foto25.jpg">
-        <p> 💕</p>
-    </div>
         <div class="foto">
-        <img src="foto26.jpg">
-        <p> 💕</p>
-    </div>
-    
+    <img src="foto12.jpg">
+    <p> ❤️</p>
+</div>
+
         <div class="foto">
-        <img src="foto14.jpg">
-        <p> 💕</p>
-    </div>
- 
+    <img src="foto13.jpg">
+    <p> 💕</p>
+</div>
+
         <div class="foto">
-        <img src="foto27.jpg">
-        <p> 💕</p>
-    </div>
-    
+    <img src="foto14.jpg">
+    <p> ✨</p>
+</div>
+
         <div class="foto">
-        <img src="foto28.jpg">
-        <p> 💕</p>
-    </div>
-    
+    <img src="foto15.jpg">
+    <p> ❤️</p>
+</div>
+
         <div class="foto">
-        <img src="foto29.jpg">
-        <p> 💕</p>
-    </div>
-    
+    <img src="foto16.jpg">
+    <p> ❤️</p>
+</div>
+
         <div class="foto">
-        <img src="foto30.jpg">
-        <p> 💕</p>
-    </div>
-  
+    <img src="foto17.jpg">
+    <p> ❤️</p>
+</div>
+
         <div class="foto">
-        <img src="foto31.jpg">
-        <p> 💕</p>
+    <img src="foto18.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto19.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto20.jpg">
+    <p> 💕</p>
+</div>
+
+        <div class="foto">
+    <img src="foto21.jpg">
+    <p> ✨</p>
+</div>
+
+        <div class="foto">
+    <img src="foto22.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto23.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto24.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto25.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto26.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto27.jpg">
+    <p> 💕</p>
+</div>
+
+        <div class="foto">
+    <img src="foto28.jpg">
+    <p> ✨</p>
+</div>
+
+        <div class="foto">
+    <img src="foto29.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto30.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto31.jpg">
+    <p> ❤️</p>
+</div>
+
+        <div class="foto">
+    <img src="foto32.jpg">
+    <p> ❤️</p>
+</div>
+
+        
     </div>
 </div>
-        </div>
 <!-- video -->
      <div class="video-seccion">
 
@@ -1066,6 +1208,20 @@ button:hover{
 </div>
    
 <script>
+function alternarGaleria() {
+    const galeria = document.getElementById("galeriaFotos");
+    const boton = document.getElementById("botonGaleria");
+    const texto = document.getElementById("textoGaleria");
+
+    const abierta = galeria.classList.toggle("abierta");
+
+    boton.setAttribute("aria-expanded", abierta);
+
+    texto.textContent = abierta
+        ? "Toca para plegar nuestros recuerdos ❤️"
+        : "Toca para descubrir nuestros recuerdos ❤️";
+}
+
  
 /* =====================================
    REPRODUCTOR MULTICANCIÓN
