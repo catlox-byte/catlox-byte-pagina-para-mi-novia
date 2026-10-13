@@ -1,8 +1,16 @@
+
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "pagina-para-mi-novia",
   "compatibility_date": "2026-10-13",
   "assets": {
     "directory": "."
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "AHORROS_DB",
+      "database_name": "pareja-ahorro-dev",
+      "database_id": "5bf183fb-af8a-4d17-b3cc-eeabf29a28c4"
+    }
+  ]
 }
