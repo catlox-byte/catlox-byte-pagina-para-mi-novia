@@ -2,9 +2,11 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "pagina-para-mi-novia",
+  "main": "src/index.js",
   "compatibility_date": "2026-10-13",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
   "d1_databases": [
     {
