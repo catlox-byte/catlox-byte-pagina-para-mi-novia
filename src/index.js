@@ -307,6 +307,106 @@ async function handle(request, env) {
   }
 
   // Consulta protegida del ahorro.
+  
+  // Registrar una aportación para la cuenta autenticada.
+  if (path === "/api/ahorros/aportaciones" &&
+      request.method === "POST") {
+    const member = await sessionMember(request, env);
+
+    if (!member) {
+      return json({ ok: false, mensaje: "Inicia sesión para continuar" }, 401);
+    }
+
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return json({ ok: false, mensaje: "Solicitud inválida" }, 400);
+    }
+
+    const { amount_cents, contribution_date, note = "" } = body || {};
+
+    if (!Number.isSafeInteger(amount_cents) ||
+        amount_cents <= 0 ||
+        amount_cents > 100000000) {
+      return json({
+        ok: false,
+        mensaje: "El importe debe ser positivo y válido"
+      }, 400);
+    }
+
+    if (typeof contribution_date !== "string" ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(contribution_date) ||
+        new Date(contribution_date + "T00:00:00Z")
+          .toISOString().slice(0, 10) !== contribution_date) {
+      return json({ ok: false, mensaje: "Fecha inválida" }, 400);
+    }
+
+    if (typeof note !== "string" || note.length > 200) {
+      return json({
+        ok: false,
+        mensaje: "La nota no puede superar 200 caracteres"
+      }, 400);
+    }
+
+    const result = await db.prepare(`
+      INSERT INTO contributions
+        (member, amount_cents, contribution_date, note)
+      VALUES (?, ?, ?, ?)
+    `).bind(
+      member,
+      amount_cents,
+      contribution_date,
+      note.trim() || null
+    ).run();
+
+    return json({
+      ok: true,
+      id: result.meta.last_row_id,
+      mensaje: "Aportación registrada"
+    }, 201);
+  }
+
+  // Actualizar la meta compartida.
+  if (path === "/api/ahorros/meta" &&
+      request.method === "PUT") {
+    const member = await sessionMember(request, env);
+
+    if (!member) {
+      return json({ ok: false, mensaje: "Inicia sesión para continuar" }, 401);
+    }
+
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return json({ ok: false, mensaje: "Solicitud inválida" }, 400);
+    }
+
+    const { goal_cents } = body || {};
+
+    if (!Number.isSafeInteger(goal_cents) ||
+        goal_cents < 0 ||
+        goal_cents > 100000000000) {
+      return json({
+        ok: false,
+        mensaje: "La meta debe ser una cantidad válida en centavos"
+      }, 400);
+    }
+
+    await db.prepare(`
+      UPDATE savings_settings
+      SET goal_cents = ?
+      WHERE id = 1
+    `).bind(goal_cents).run();
+
+    return json({
+      ok: true,
+      meta_centavos: goal_cents,
+      mensaje: "Meta actualizada"
+    });
+  }
+
   if (path === "/api/ahorros") {
     if (request.method !== "GET") {
       return json({ ok: false, mensaje: "Método no permitido" }, 405);
