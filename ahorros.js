@@ -80,11 +80,12 @@ const Ahorros = (() => {
 
           await api("/api/ahorros/aportaciones", {
             method: "POST",
-            body: JSON.stringify({
-              amount_cents: Math.round(cantidad * 100),
-              contribution_date: formulario.elements.fecha.value,
-              note: formulario.elements.nota.value
-            })
+body: JSON.stringify({
+  member: formulario.elements.persona.value,
+  amount_cents: Math.round(cantidad * 100),
+  contribution_date: formulario.elements.fecha.value,
+  note: formulario.elements.nota.value
+})
           });
 
           formulario.reset();
