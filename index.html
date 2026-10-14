@@ -885,6 +885,37 @@ body {
 </head>
 <body>
     
+<h3>💰 Registrar aportación</h3>
+<form id="form-aportacion">
+  <label>
+    Cantidad en pesos
+    <input name="cantidad" type="number" min="0.01" step="0.01" required>
+  </label>
+
+  <label>
+    Fecha
+    <input name="fecha" type="date" required>
+  </label>
+
+  <label>
+    Nota (opcional)
+    <input name="nota" type="text" maxlength="200">
+  </label>
+
+  <button type="submit">Guardar aportación</button>
+</form>
+
+<h3>🎯 Cambiar nuestra meta</h3>
+<form id="form-meta">
+  <label>
+    Meta en pesos
+    <input name="meta" type="number" min="0" step="0.01" required>
+  </label>
+
+  <button type="submit">Actualizar meta</button>
+</form>
+
+    
 <section id="seccion-ahorros" class="seccion-ahorros">
   <h2>🌱 Nuestro ahorro juntos</h2>
   <p>Pequeños pasos, grandes sueños.</p>
