@@ -469,12 +469,16 @@ async function handle(request, env) {
 export default {
   async fetch(request, env) {
     try {
-      if (!env.AHORROS_DB || !env.SESSION_SECRET) {
-        return json({
-          ok: false,
-          mensaje: "Falta configurar el servidor"
-        }, 500);
-      }
+     if (!env.AHORROS_DB || !env.SESSION_SECRET) {
+  return json({
+    ok: false,
+    mensaje: "Falta configurar el servidor",
+    diagnostico: {
+      AHORROS_DB: Boolean(env.AHORROS_DB),
+      SESSION_SECRET: Boolean(env.SESSION_SECRET)
+    }
+  }, 500);
+}
 
       return await handle(request, env);
     } catch (error) {
