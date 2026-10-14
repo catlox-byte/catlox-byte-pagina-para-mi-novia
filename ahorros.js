@@ -27,6 +27,7 @@ const Ahorros = (() => {
 
   async function cargar() {
     const datos = await api("/api/ahorros");
+
     document.querySelector("#ahorro-total").textContent =
       dinero(datos.total_centavos);
     document.querySelector("#ahorro-meta").textContent =
@@ -52,12 +53,80 @@ const Ahorros = (() => {
 
   async function iniciar() {
     const mensaje = document.querySelector("#ahorro-mensaje");
+
     try {
       await cargar();
       mensaje.textContent = "Ahorros actualizados.";
     } catch (error) {
       mensaje.textContent = error.message;
     }
+
+    document.querySelector("#form-aportacion")
+      ?.addEventListener("submit", async evento => {
+        evento.preventDefault();
+        const formulario = evento.currentTarget;
+        const boton = formulario.querySelector("button");
+
+        try {
+          boton.disabled = true;
+
+          const cantidad = Number(
+            formulario.elements.cantidad.value
+          );
+
+          if (!Number.isFinite(cantidad) || cantidad <= 0) {
+            throw new Error("Escribe una cantidad válida.");
+          }
+
+          await api("/api/ahorros/aportaciones", {
+            method: "POST",
+            body: JSON.stringify({
+              amount_cents: Math.round(cantidad * 100),
+              contribution_date: formulario.elements.fecha.value,
+              note: formulario.elements.nota.value
+            })
+          });
+
+          formulario.reset();
+          mensaje.textContent = "¡Aportación guardada! 💗";
+          await cargar();
+        } catch (error) {
+          mensaje.textContent = error.message;
+        } finally {
+          boton.disabled = false;
+        }
+      });
+
+    document.querySelector("#form-meta")
+      ?.addEventListener("submit", async evento => {
+        evento.preventDefault();
+        const formulario = evento.currentTarget;
+        const boton = formulario.querySelector("button");
+
+        try {
+          boton.disabled = true;
+
+          const cantidad = Number(formulario.elements.meta.value);
+
+          if (!Number.isFinite(cantidad) || cantidad < 0) {
+            throw new Error("Escribe una meta válida.");
+          }
+
+          await api("/api/ahorros/meta", {
+            method: "PUT",
+            body: JSON.stringify({
+              goal_cents: Math.round(cantidad * 100)
+            })
+          });
+
+          mensaje.textContent = "¡Meta actualizada! 🌱";
+          await cargar();
+        } catch (error) {
+          mensaje.textContent = error.message;
+        } finally {
+          boton.disabled = false;
+        }
+      });
   }
 
   return { iniciar, cargar };
