@@ -6,7 +6,98 @@
 <title>Para Ti ❤️</title>
 <p style="color:white;">Actualización 3.0</p>
     
-<style>/*  acordion galeria */
+<style>
+    
+/* Sección de ahorro en pareja */
+.seccion-ahorros {
+  color: #f5f0ff;
+  background: rgba(18, 14, 35, 0.96);
+  padding: 30px 20px;
+  margin: 35px auto;
+  max-width: 1000px;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.seccion-ahorros h2,
+.seccion-ahorros h3,
+.seccion-ahorros p,
+.seccion-ahorros label,
+.seccion-ahorros li {
+  color: #f5f0ff;
+}
+
+.seccion-ahorros .ahorro-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin: 24px 0;
+}
+
+.seccion-ahorros .ahorro-resumen article {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.seccion-ahorros .ahorro-resumen p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.seccion-ahorros form {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0 28px;
+}
+
+.seccion-ahorros label {
+  display: grid;
+  gap: 7px;
+}
+
+.seccion-ahorros input {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  color: #20172b;
+  background: #fff;
+  border: 1px solid #c9b7e8;
+  border-radius: 9px;
+}
+
+.seccion-ahorros button {
+  padding: 12px 18px;
+  color: white;
+  background: #8b5cf6;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.seccion-ahorros button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.seccion-ahorros #ahorro-historial {
+  padding-left: 22px;
+}
+
+.seccion-ahorros #ahorro-historial li {
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+
+.seccion-ahorros #ahorro-mensaje {
+  margin-top: 16px;
+  font-weight: bold;
+}
+
+    /*  acordion galeria */
     @media (max-width: 600px) {
     img {
         max-width: 100%;
