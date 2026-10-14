@@ -71,6 +71,67 @@ async function sessionMember(request, env) {
 }
 
 async function handle(request, env) {
+  
+  if (url.pathname === "/api/setup" && request.method === "POST") {
+    if (!env.SETUP_SECRET) {
+      return json({ ok: false, mensaje: "Configuración inicial deshabilitada" }, 403);
+    }
+
+    const authorization = request.headers.get("Authorization");
+    if (authorization !== `Bearer ${env.SETUP_SECRET}`) {
+      return json({ ok: false, mensaje: "No autorizado" }, 401);
+    }
+
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return json({ ok: false, mensaje: "Solicitud inválida" }, 400);
+    }
+
+    const pins = body?.pins;
+    if (!pins ||
+        typeof pins.persona1 !== "string" ||
+        typeof pins.persona2 !== "string" ||
+        !/^\d{4}$/.test(pins.persona1) ||
+        !/^\d{4}$/.test(pins.persona2) ||
+        pins.persona1 === pins.persona2) {
+      return json({
+        ok: false,
+        mensaje: "Se necesitan dos PIN distintos de cuatro dígitos"
+      }, 400);
+    }
+
+    const existing = await db.prepare(
+      "SELECT COUNT(*) AS total FROM savings_users"
+    ).first();
+
+    if (existing.total > 0) {
+      return json({
+        ok: false,
+        mensaje: "El registro inicial ya se utilizó"
+      }, 409);
+    }
+
+    const salt1 = randomHex();
+    const salt2 = randomHex();
+    const hash1 = `${salt1}:${await hash(pins.persona1, salt1)}`;
+    const hash2 = `${salt2}:${await hash(pins.persona2, salt2)}`;
+
+    await db.batch([
+      db.prepare(
+        "INSERT INTO savings_users (member, pin_hash) VALUES (?, ?)"
+      ).bind("persona1", hash1),
+      db.prepare(
+        "INSERT INTO savings_users (member, pin_hash) VALUES (?, ?)"
+      ).bind("persona2", hash2)
+    ]);
+
+    return json({ ok: true, mensaje: "Usuarios registrados" }, 201, {
+      "Cache-Control": "no-store"
+    });
+  }
+
   const url = new URL(request.url);
   const db = env.AHORROS_DB;
 
