@@ -319,7 +319,19 @@ async function handle(request, env) {
       return json({ ok: false, mensaje: "Solicitud inválida" }, 400);
     }
 
-    const { amount_cents, contribution_date, note = "" } = body || {};
+   const {
+  member,
+  amount_cents,
+  contribution_date,
+  note = ""
+} = body || {};
+
+if (!["persona1", "persona2"].includes(member)) {
+  return json({
+    ok: false,
+    mensaje: "Selecciona una persona válida"
+  }, 400);
+}
 
     if (!Number.isSafeInteger(amount_cents) ||
         amount_cents <= 0 ||
@@ -362,6 +374,7 @@ async function handle(request, env) {
     }, 201);
   }
 
+  
   // Actualizar la meta compartida.
   if (path === "/api/ahorros/meta" &&
       request.method === "PUT") {
@@ -370,22 +383,14 @@ async function handle(request, env) {
     try {
       body = await request.json();
     } catch {
-      return json({ ok: false, mensaje: "Solicitud inválida" }, 400);
+      return json({
+        ok: false,
+        mensaje: "Solicitud inválida"
+      }, 400);
     }
 
-    const {
-  member,
-  amount_cents,
-  contribution_date,
-  note = ""
-} = body || {};
+    const { goal_cents } = body || {};
 
-if (!["persona1", "persona2"].includes(member)) {
-  return json({
-    ok: false,
-    mensaje: "Selecciona una persona válida"
-  }, 400);
-}
     if (!Number.isSafeInteger(goal_cents) ||
         goal_cents < 0 ||
         goal_cents > 100000000000) {
@@ -408,56 +413,6 @@ if (!["persona1", "persona2"].includes(member)) {
     });
   }
 
-  if (path === "/api/ahorros") {
-    if (request.method !== "GET") {
-      return json({ ok: false, mensaje: "Método no permitido" }, 405);
-    }
-
-    const member = await sessionMember(request, env);
-
-    if (!member) {
-      return json({
-        ok: false,
-        mensaje: "Inicia sesión para continuar"
-      }, 401);
-    }
-
-    const configuracion = await db.prepare(`
-      SELECT goal_cents
-      FROM savings_settings
-      WHERE id = 1
-    `).first();
-
-    const resumen = await db.prepare(`
-      SELECT
-        COALESCE(SUM(amount_cents), 0) AS total_cents,
-        COALESCE(SUM(
-          CASE WHEN member = 'persona1'
-          THEN amount_cents ELSE 0 END
-        ), 0) AS persona1_cents,
-        COALESCE(SUM(
-          CASE WHEN member = 'persona2'
-          THEN amount_cents ELSE 0 END
-        ), 0) AS persona2_cents
-      FROM contributions
-    `).first();
-
-    const historial = await db.prepare(`
-      SELECT id, member, amount_cents, contribution_date, note
-      FROM contributions
-      ORDER BY contribution_date DESC, id DESC
-      LIMIT 20
-    `).all();
-
-    return json({
-      ok: true,
-      meta_centavos: configuracion?.goal_cents ?? 0,
-      total_centavos: resumen.total_cents,
-      persona1_centavos: resumen.persona1_cents,
-      persona2_centavos: resumen.persona2_cents,
-      historial: historial.results
-    });
-  }
 
   // Los demás recursos los sirve el sitio estático.
   if (path.startsWith("/api/")) {
