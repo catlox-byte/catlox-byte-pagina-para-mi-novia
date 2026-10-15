@@ -307,7 +307,45 @@ async function handle(request, env) {
   }
 
   // Consulta protegida del ahorro.
-  
+  // Consultar el resumen y el historial de ahorros.
+if (path === "/api/ahorros" &&
+    request.method === "GET") {
+
+  const meta = await db.prepare(`
+    SELECT goal_cents
+    FROM savings_settings
+    WHERE id = 1
+  `).first();
+
+  const totales = await db.prepare(`
+    SELECT
+      COALESCE(SUM(amount_cents), 0) AS total_centavos,
+      COALESCE(SUM(
+        CASE WHEN member = 'persona1'
+        THEN amount_cents ELSE 0 END
+      ), 0) AS persona1_centavos,
+      COALESCE(SUM(
+        CASE WHEN member = 'persona2'
+        THEN amount_cents ELSE 0 END
+      ), 0) AS persona2_centavos
+    FROM contributions
+  `).first();
+
+  const historial = await db.prepare(`
+    SELECT id, member, amount_cents, contribution_date, note
+    FROM contributions
+    ORDER BY contribution_date DESC, id DESC
+    LIMIT 100
+  `).all();
+
+  return json({
+    total_centavos: totales.total_centavos,
+    meta_centavos: meta?.goal_cents ?? 0,
+    persona1_centavos: totales.persona1_centavos,
+    persona2_centavos: totales.persona2_centavos,
+    historial: historial.results
+  });
+}
   // Registrar una aportación para la cuenta autenticada.
   if (path === "/api/ahorros/aportaciones" &&
       request.method === "POST") {
